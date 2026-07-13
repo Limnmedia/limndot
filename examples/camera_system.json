@@ -1,0 +1,16 @@
+{
+  "name": "LIMNDOT Translation Flow",
+  "directed": true,
+  "graph_attributes": {"rankdir": "LR"},
+  "nodes": [
+    {"id": "source", "label": "Structured Source", "group": "Input", "kind": "file"},
+    {"id": "adapter", "label": "LIMNDOT Adapter", "group": "Translation", "kind": "process"},
+    {"id": "dot", "label": "Editable DOT", "group": "Translation", "kind": "file"},
+    {"id": "preview", "label": "Graph Preview", "group": "Output", "kind": "application"}
+  ],
+  "edges": [
+    {"source": "source", "target": "adapter", "label": "parsed by"},
+    {"source": "adapter", "target": "dot", "label": "generates"},
+    {"source": "dot", "target": "preview", "label": "renders as"}
+  ]
+}

@@ -1,0 +1,4 @@
+source,target,label,source_group,target_group,source_kind,target_kind
+camera,dragonframe,captured by,Capture,Software,device,application
+dragonframe,motion_control,controls,Software,Hardware,application,device
+motion_control,camera,moves,Hardware,Capture,device,device
