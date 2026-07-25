@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -11,6 +12,27 @@ from typing import Callable, Sequence
 
 SUPPORTED_ENGINES = ("dot", "neato", "fdp", "sfdp", "circo", "twopi")
 SUPPORTED_FORMATS = ("svg", "png", "pdf")
+
+
+def find_graphviz_executable(engine: str) -> str | None:
+    """Find a Graphviz engine on PATH or in standard Windows installs."""
+    executable = shutil.which(engine)
+    if executable is not None:
+        return executable
+
+    if os.name != "nt":
+        return None
+
+    install_roots = {
+        os.environ.get("ProgramFiles"),
+        os.environ.get("ProgramW6432"),
+        os.environ.get("ProgramFiles(x86)"),
+    }
+    for root in filter(None, install_roots):
+        candidate = Path(root) / "Graphviz" / "bin" / f"{engine}.exe"
+        if candidate.is_file():
+            return str(candidate)
+    return None
 
 
 @dataclass(frozen=True, slots=True)
@@ -34,7 +56,7 @@ class GraphvizRenderer:
     def __init__(
         self,
         *,
-        executable_finder: Callable[[str], str | None] = shutil.which,
+        executable_finder: Callable[[str], str | None] = find_graphviz_executable,
         runner: Runner = subprocess.run,
     ) -> None:
         self._executable_finder = executable_finder
@@ -152,4 +174,3 @@ def render(
 ) -> RenderResult:
     """Render DOT using a default :class:`GraphvizRenderer`."""
     return GraphvizRenderer().render(dot_source, engine, output_format)
-
