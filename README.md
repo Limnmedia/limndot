@@ -27,6 +27,53 @@ The installed `limndot` command is also available while the virtual environment
 is activated. LIMNDOT detects the selected Graphviz executable on `PATH` and
 reports a visible render error if it is unavailable.
 
+## macOS command-line installation
+
+LIMNDOT can be installed and launched from Terminal without building a native
+macOS application bundle. This route uses Homebrew for dependencies and `pipx`
+to keep LIMNDOT isolated from the system Python.
+
+On Apple Silicon macOS:
+
+```bash
+brew install python@3.13 graphviz pipx
+pipx ensurepath
+```
+
+Open a new Terminal window so the `pipx` command directory is on `PATH`, then
+install the approved repository revision:
+
+```bash
+pipx install \\
+  --python "$(brew --prefix python@3.13)/bin/python3.13" \\
+  "git+https://github.com/Limnmedia/LIMNDOT.git@v0.1.0"
+```
+
+Launch LIMNDOT from Terminal:
+
+```bash
+limndot
+```
+
+The GUI runs as a normal foreground process attached to that Terminal. A
+short startup validation can be run without leaving the window open:
+
+```bash
+limndot --smoke-test
+```
+
+Confirm Graphviz separately with `dot -V`. To update, install a newer approved
+commit with the same `pipx install --force` command. To remove LIMNDOT without
+affecting other LIMN applications:
+
+```bash
+pipx uninstall limndot
+```
+
+Do not pipe remote scripts into a shell, modify the system Python, or add
+macOS signing, entitlements, launch agents, or background services for this
+distribution path.
+
 ## Translation architecture
 
 ```text
