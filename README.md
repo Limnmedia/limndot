@@ -74,6 +74,34 @@ Do not pipe remote scripts into a shell, modify the system Python, or add
 macOS signing, entitlements, launch agents, or background services for this
 distribution path.
 
+## Windows and Linux installation
+
+LIMNDOT is a platform-independent Python package. Windows and Linux users
+install Python 3.13 and Graphviz using their normal system tools, then install
+the released package in an isolated environment.
+
+Windows PowerShell:
+
+```powershell
+py -3.13 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install "git+https://github.com/Limnmedia/LIMNDOT.git@v0.1.1"
+.\.venv\Scripts\limndot.exe
+```
+
+Linux:
+
+```bash
+python3.13 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install "git+https://github.com/Limnmedia/LIMNDOT.git@v0.1.1"
+.venv/bin/limndot
+```
+
+Install Graphviz separately and verify it with `dot -V`. The package does not
+bundle Graphviz, access cameras or devices, install services, or require
+platform signing.
+
 ## Translation architecture
 
 ```text
