@@ -1,11 +1,8 @@
 # LIMNDOT
 
-> LIMNDOT is a lightweight desktop application for discovering and refining the structure of relationships.
+**LIMNDOT is LIMNMEDIA's lightweight desktop workbench for exploring relationships as clear, editable diagrams.** It helps turn structured connections into visible graphs so their organization is easier to inspect and refine.
 
-LIMNDOT is a Python 3.13 and PySide6 graph workbench. It allows relationships to
-be expressed as DOT source and immediately visualized using Graphviz. It also
-translates generic CSV relationship tables or explicit JSON graphs into editable,
-deterministic DOT without hiding the imported source.
+A graph represents items and the relationships between them. LIMNDOT uses Python 3.13, PySide6, DOT, and Graphviz to visualize those relationships. It can translate CSV relationship tables or JSON graphs into editable DOT while keeping the imported source visible. This addresses the difficulty of understanding connections when they are buried in tables or text.
 
 The objective is not decorative diagramming. The objective is to help the user
 discover clear, stable structure. See [SCOPE_AND_ROADMAP.md](SCOPE_AND_ROADMAP.md)
